@@ -1,0 +1,73 @@
+name: Add Issue to Project and Apply Labels
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to Ignite project
+        uses: actions/add-to-project@v0.5.0
+        with:
+          project-url: https://github.com/orgs/microsoft/projects/ignite-2025
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+  label_issues:
+    name: Apply labels to issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = [];
+            
+            // Add default labels for Ignite issues
+            labels.push('ignite-2025');
+            
+            // Add labels based on issue title or content
+            const titleLower = issue.title.toLowerCase();
+            const bodyLower = issue.body ? issue.body.toLowerCase() : '';
+            
+            // Check for common keywords and apply appropriate labels
+            if (titleLower.includes('bug') || titleLower.includes('error') || titleLower.includes('issue')) {
+              labels.push('bug');
+            }
+            
+            if (titleLower.includes('feature') || titleLower.includes('enhancement') || titleLower.includes('request')) {
+              labels.push('enhancement');
+            }
+            
+            if (titleLower.includes('documentation') || titleLower.includes('docs') || titleLower.includes('readme')) {
+              labels.push('documentation');
+            }
+            
+            if (titleLower.includes('question') || titleLower.includes('help') || titleLower.includes('support')) {
+              labels.push('question');
+            }
+            
+            if (titleLower.includes('lab') || bodyLower.includes('lab')) {
+              labels.push('lab-related');
+            }
+            
+            if (titleLower.includes('windows ml') || titleLower.includes('winml') || bodyLower.includes('windows ml')) {
+              labels.push('windows-ml');
+            }
+            
+            if (titleLower.includes('ai') || titleLower.includes('machine learning') || titleLower.includes('ml')) {
+              labels.push('ai-ml');
+            }
+            
+            // Apply the labels to the issue
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
