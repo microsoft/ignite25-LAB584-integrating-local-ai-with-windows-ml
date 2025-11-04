@@ -1,0 +1,157 @@
+﻿<Window x:Class="WinMLLabDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinMLLabDemo"
+        mc:Ignorable="d"
+        Title="WinML Demo Application" Height="700" Width="1000"
+        MinHeight="600" MinWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Top Section with two columns -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Left Section: Execution Providers -->
+            <GroupBox Grid.Column="0" Header="Execution Providers" Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Buttons for EP management -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button x:Name="RefreshEPButton" Content="Refresh List" 
+                                Width="100" Height="30" Margin="0,0,10,0"
+                                Click="RefreshEPButton_Click"/>
+                        <Button x:Name="InitializeWinMLEPsButton" Content="Initialize WinML EPs" 
+                                Width="120" Height="30"
+                                Click="InitializeWinMLEPsButton_Click"/>
+                    </StackPanel>
+                    
+                    <!-- DataGrid for Execution Providers -->
+                    <DataGrid x:Name="ExecutionProvidersGrid" Grid.Row="1"
+                              AutoGenerateColumns="False" 
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              IsReadOnly="True"
+                              GridLinesVisibility="All"
+                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding EpName}" Width="*"/>
+                            <DataGridTextColumn Header="Vendor" Binding="{Binding EpVendor}" Width="*"/>
+                            <DataGridTextColumn Header="Device Type" Binding="{Binding HardwareDevice.Type}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+            
+            <!-- Right Section: Image Classification -->
+            <GroupBox Grid.Column="1" Header="Image Classification" Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- File picker section -->
+                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox x:Name="ImagePathTextBox" Grid.Column="0"
+                                 Height="30" VerticalContentAlignment="Center"
+                                 IsReadOnly="True" Margin="0,0,10,0"/>
+                        <Button x:Name="BrowseImageButton" Grid.Column="1"
+                                Content="Browse..." Width="80" Height="30"
+                                Click="BrowseImageButton_Click"/>
+                    </Grid>
+                    
+                    <!-- Selected image preview -->
+                    <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" 
+                            Height="150" Margin="0,0,0,10">
+                        <Image x:Name="SelectedImage" Stretch="Uniform"/>
+                    </Border>
+                    
+                    <!-- Compile and Run buttons -->
+                    <Grid Grid.Row="2" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button x:Name="CompileModelButton" Grid.Column="0"
+                                Content="Compile Model" Height="35" 
+                                FontWeight="Bold" Margin="0,0,5,0"
+                                IsEnabled="False"
+                                Click="CompileModelButton_Click"/>
+
+
+                        <Button x:Name="LoadModelButton" Grid.Column="1"
+                                Content="Load Model" Height="35" 
+                                FontWeight="Bold" Margin="0,0,5,0"
+                                IsEnabled="False"
+                                Click="LoadModelButton_Click"/>
+
+                        <Button x:Name="RunButton" Grid.Column="2"
+                                Content="Run Classification" Height="35" 
+                                FontWeight="Bold" Margin="5,0,0,0"
+                                IsEnabled="False"
+                                Click="RunButton_Click"/>
+                    </Grid>
+                    
+                    <!-- Classification results -->
+                    <GroupBox Grid.Row="3" Header="Classification Results">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="ResultsTextBlock" 
+                                       TextWrapping="Wrap" 
+                                       FontFamily="Consolas"
+                                       Background="White"
+                                       Padding="5"/>
+                        </ScrollViewer>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        
+        <!-- Bottom Section: Console Output -->
+        <GroupBox Grid.Row="1" Header="Console Output" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" 
+                              HorizontalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="ConsoleTextBlock" 
+                               FontFamily="Consolas" 
+                               FontSize="11"
+                               Background="Black" 
+                               Foreground="LightGray"
+                               Padding="5"
+                               TextWrapping="Wrap"/>
+                </ScrollViewer>
+                
+                <Button x:Name="ClearConsoleButton" Grid.Row="1"
+                        Content="Clear Console" Width="100" Height="25"
+                        HorizontalAlignment="Right" Margin="0,5,0,0"
+                        Click="ClearConsoleButton_Click"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

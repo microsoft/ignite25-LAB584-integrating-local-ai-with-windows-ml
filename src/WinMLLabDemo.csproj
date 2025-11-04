@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SqueezeNet.Labels.txt" />
+    <None Remove="SqueezeNet.onnx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SqueezeNet.Labels.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqueezeNet.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.250916003" />
+    <PackageReference Include="System.Numerics.Tensors" Version="9.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <!-- Image source : https://brandcentral.microsoft.com/asset-detail.html?id=L2NvbnRlbnQvZGFtL3NvdXJjZS9taWNyb3NvZnQtcHJvZHVjdHMtc2VydmljZXMvYXp1cmUvcGhvdG9ncmFwaHkvMjAxNy9DTE8xN19henVyZV8wMTY%3D&searchType=simple&fuzzyTerm= -->
+    <Content Update="image.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="image2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
