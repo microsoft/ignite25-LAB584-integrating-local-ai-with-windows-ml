@@ -1,21 +1,3 @@
-
-## Put your docs in the docs folder
-
-This repo is configured for a user to view the docs through mkdocs.
-
-1. update the `mkdocs.yml` file to reference your session. Look particularly for the `site_name`, `site_author`, and `repo_name` tags.
-1. Subfolders in the docs folder will show up as tabs in the navigation bar.
-
-
-## Finished?
-
-- Remove the folders that you don't need or didn't use, *please don't leave them empty with placeholder readmes*
-- Delete this line and everything above it!
-
-<p align="center">
-<img src="img/Banner-ignite-25.png" alt="decorative banner" width="1200"/>
-</p>
-
 # [Microsoft Ignite 2025](https://ignite.microsoft.com)
 
 ## 🔥LAB584: Integrating Local AI with Windows ML
