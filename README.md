@@ -20,11 +20,13 @@ This repo is configured for a user to view the docs through mkdocs.
 
 ## 🔥LAB584: Integrating Local AI with Windows ML
 
-### Session Description
+### 🧠 Session Description
 
 Build a smarter image classification app with Windows ML, now generally available. This hands-on lab walks through dynamically downloading execution providers (EPs) for NPUs, compiling models for hardware-specific EPs, and running inference locally. Learn to deploy, debug, and optimize your app using WinML APIs. Ideal for developers exploring AI acceleration on Windows devices—no pre-distributed EPs required.
 
-### 🧠 Learning Outcomes
+💻 [In-person Ignite Lab](https://aka.ms/WinML_Lab)
+
+### 💡 Learning Outcomes
 
 By the end of this session, learners will be able to:
 

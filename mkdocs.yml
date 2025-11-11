@@ -19,19 +19,19 @@
 
 
 # Project information .........................................
-site_name: "Session Title"
-site_url: 
-site_author: Content Creator
+site_name: "Integrating Local AI with Windows ML"
+site_url: "https://aka.ms/WinML_Lab"
+site_author: Darshak Bhatti, Siyuan Peng
 site_description: >-
-  Demo mkdocs for Ignite Repos
+  Integrating Local AI with Windows ML Ignite Lab
 
 # Repository ..................................................
-repo_name: microsoft/Ignite25-Repo-Template
-repo_url: https://github.com/microsoft/Ignite25-Repo-Template
+repo_name: WindowsML-Lab
+repo_url: https://aka.ms/WinML_Lab
 
 # Copyright ...................................................
 copyright: >
-  Copyright &copy; 2023 - present Microsoft
+  Copyright &copy; 2025 - present Microsoft
 
 extra_css:
   - assets/extra.css  # Adjust path if needed
